@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SSMON</title>
+<script src="/js/jquery-3.6.0.min.js"></script>
+<link href="/css/bs/bootstrap.min.css" rel="stylesheet">
+<script src="/js/bs/bootstrap.bundle.min.js"></script>
+<script src="/js/bs/bootstrap.min.js"></script>
+<link href="/css/dashboard.css" rel="stylesheet">
+<script src="/js/ssmon.js"></script>
+</head>
+
+<body class="text-center">
+
+
+
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+	<div class="navbar-nav"><div class="nav-item text-nowrap px-3"><img src="/img/logo.png" style="margin-top: 5px" height="40px"></div></div>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="/logout">로그아웃</a>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+				<!--
+        <div class="nav list-group flex-column" style="text-align: left">
+				-->
+        <div class="list-group" style="text-align: left">
+          <a class="list-group-item list-group-item-action {{if eq .Menu "tcp_server"}}active{{end}}" href="/mgmt/tcp_server">TCP 서버 관리 </a>
+          <a class="list-group-item list-group-item-action {{if eq .Menu "tcp_monitor"}}active{{end}}" href="/mgmt/tcp_monitor">TCP 서버 모니터링</a>
+          <a class="list-group-item list-group-item-action {{if eq .Menu "http_server"}}active{{end}}" href="/mgmt/http_server">HTTP 서버 관리</a>
+          <a class="list-group-item list-group-item-action {{if eq .Menu "http_monitor"}}active{{end}}" href="/mgmt/http_monitor">HTTP 서버 모니터링</a>
+          <a class="list-group-item list-group-item-action {{if eq .Menu "ping_server"}}active{{end}}" href="/mgmt/ping_server">PING 서버 관리</a>
+          <a class="list-group-item list-group-item-action {{if eq .Menu "ping_monitor"}}active{{end}}" href="/mgmt/ping_monitor">PING 서버 모니터링</a>
+					<a class="list-group-item list-group-item-action {{if eq .Menu "admin"}}active{{end}}" href="/mgmt/admin">관리자</a>
+					<a class="list-group-item list-group-item-action {{if eq .Menu "errlog"}}active{{end}}" href="/mgmt/errlog/0">장애/복구 로그</a>
+          <a class="list-group-item list-group-item-action {{if eq .Menu "setting"}}active{{end}}" href="/mgmt/setting">설정</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+{{embed}}
+    </main>
+  </div>
+</div>
+
+<div class="toast position-fixed bottom-0 end-0 bg-warning" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+		{{ .Flash }}
+  </div>
+</div>
+
+
+{{if .Flash}}
+<script>
+$(document).ready(function() {
+    $(".toast").toast('show');
+});
+</script>
+{{end}}
+
+
+</body>
+</html>
+
+</body>
+</html>
+
