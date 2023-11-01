@@ -1,8 +1,8 @@
-# SSMON2 (Simple Server Monitor) - 시스템 모니터링 - 개발중
+# SSMON2 (Simple Server Monitor) - 시스템 모니터링 - 개발중!!!
 
 * ERD : https://dbdiagram.io/d/615640cb825b5b01461b8253
-* 개발언어 : [Go](https://golang.org/)
-* 운영환경 : Ubuntu Linux + MySQL + [Gin](https://gin-gonic.com/)
+* 개발언어 : [Go](https://golang.org/), Javascript (Svelte)
+* 운영환경 : Ubuntu Linux + MySQL 8.0 + [Gin](https://gin-gonic.com/)
 * 기능
   * ✔ TCP 포트 체크
   * ✔ HTTP 체크
