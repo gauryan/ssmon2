@@ -5,6 +5,7 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
+	"log"
 	"reflect"
 	"strconv"
 	"strings"
@@ -55,7 +56,7 @@ func Exec_procedure(db_config map[string]string, data_json string, b64 bool) str
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 
@@ -79,7 +80,7 @@ func Exec_procedure(db_config map[string]string, data_json string, b64 bool) str
 		fmt.Println(err)
 	}
 	if(err != nil || rows == nil) {
-		fmt.Println(`{"RESULT":"`+fmt.Sprint(err)+`"}`)
+		log.Println(`{"RESULT":"`+fmt.Sprint(err)+`"}`)
 		return `{"RESULT":"`+fmt.Sprint(err)+`"}`
 	}
 	if rows != nil {
@@ -132,7 +133,7 @@ func make_query(data_json string, b64 bool) string {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 
@@ -178,7 +179,7 @@ func make_value(data_json string) []interface{} {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 	
