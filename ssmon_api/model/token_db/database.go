@@ -4,6 +4,7 @@ import (
 	"crypto/sha256"
 	"encoding/json"
 	"fmt"
+	"log"
 	"math/rand"
 	"time"
 
@@ -18,7 +19,7 @@ func Make_token() string {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 
@@ -39,7 +40,7 @@ func Insert_token(token string, token_no string) string {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 
@@ -52,7 +53,7 @@ func Check_token(token string, token_no string) string {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 
@@ -65,7 +66,7 @@ func Sp_token(p_nm string, token string, token_no string) string {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 
@@ -75,13 +76,13 @@ func Sp_token(p_nm string, token string, token_no string) string {
 	param["in2"]  = token
 	data_json, _ := json.Marshal(param)
 	if config.IS_LOGGING == true {
-		fmt.Print("data_json: ")
-		fmt.Println(string(data_json))
+		log.Print("data_json: ", string(data_json))
+		// fmt.Println(string(data_json))
 	}
 
 	result := mysql.Exec_procedure(config.TOKEN_DB_CONFIG, string(data_json), false)
 	if result == "" {
-		fmt.Println("Exec_procedure 에러")
+		log.Println("Exec_procedure 에러")
 		return "0" // 에러가 발생한 경우, "0" 을 리턴
 	}
 	if config.IS_LOGGING == true {
@@ -92,8 +93,8 @@ func Sp_token(p_nm string, token string, token_no string) string {
 	data := [][]map[string]interface{}{}
 	err := json.Unmarshal([]byte(result), &data)
 	if err != nil {
-		fmt.Println(err)
-		fmt.Println("Unmarshal 에러")
+		log.Println("Unmarshal 에러", err)
+		// fmt.Println("Unmarshal 에러")
 		return "0" // 에러가 발생한 경우, "0" 을 리턴
 	}
 	// fmt.Print("Data: ")
@@ -112,7 +113,7 @@ func Check_pass_sp(pass_list map[string]int, p_nm string) int {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 	
@@ -131,7 +132,7 @@ func Check_send_sp(send_list map[string]int, p_nm string) int {
 	defer func() {
 		r := recover() // 복구 및 에러 메시지 초기화
 		if r != nil {
-			fmt.Println(r) // 에러 메시지 출력 
+			log.Println(r) // 에러 메시지 출력 
 		}
 	}()
 	
@@ -152,7 +153,7 @@ func Set_token_sp() {
 
 	result := mysql.Exec_procedure(config.TOKEN_DB_CONFIG, string(data_json), false)
 	if result == "" {
-		fmt.Println("Exec_procedure 에러")
+		log.Println("Exec_procedure 에러")
 		return
 	}
 	data_array, _, _, _ := jsonparser.Get([]byte(result), "[0]")
